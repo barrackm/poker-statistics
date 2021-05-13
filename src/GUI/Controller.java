@@ -1,11 +1,11 @@
 package GUI;
 
 import Exceptions.IllegalCard;
+import Exceptions.IllegalGame;
 import Logic.*;
 
 public class Controller {
-    public Controller() throws IllegalCard {
+    public Controller() throws IllegalGame {
         Game game = new Game(3);
-        System.out.println(game.getPlayers());
     }
 }

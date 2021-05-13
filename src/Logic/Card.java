@@ -41,7 +41,12 @@ public class Card {
         return Objects.hash(suit, value);
     }
 
+    @Override
+    public String toString() {
+        return this.suit + " " + this.value;
+    }
+
     public void print() {
-        System.out.println(this.suit + " " + this.value);
+        System.out.println(this);
     }
 }
