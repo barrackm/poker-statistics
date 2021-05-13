@@ -3,12 +3,14 @@ package Logic;
 import Exceptions.IllegalCard;
 import Exceptions.IllegalGame;
 
+import Exceptions.IllegalCard;
+
 import java.util.ArrayList;
 
 public class Game {
     private ArrayList<Player> players = new ArrayList<>();
 
-    public Game(int numPlayers) {
+    public Game(int numPlayers) throws IllegalGame {
         for(int i = 0; i < numPlayers; i++) {
             this.players.add(new Player(this));
         }
