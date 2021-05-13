@@ -1,6 +1,7 @@
 package GUI;
 
 import Exceptions.IllegalCard;
+import GUI.gameui.StartScreen;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -8,17 +9,15 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public StartScreen startScreen = new StartScreen();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Pane pane = new Pane();
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(pane, 300, 275));
-        primaryStage.show();
+        new Controller(primaryStage);
     }
 
 
-    public static void main(String[] args) throws IllegalCard {
+    public static void main(String[] args) throws Exception {
         launch(args);
-        new Controller();
     }
 }
