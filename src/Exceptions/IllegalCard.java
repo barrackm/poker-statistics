@@ -1,4 +1,4 @@
-package Logic;
+package Exceptions;
 
 public class IllegalCard extends Exception{
     public IllegalCard(String str) {

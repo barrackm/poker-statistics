@@ -1,5 +1,8 @@
 package Logic;
 
+import Exceptions.IllegalCard;
+import Exceptions.IllegalGame;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -11,9 +14,9 @@ public class Game {
         }
     }
 
-    public Game(ArrayList<Player> players) throws IllegalCard {
+    public Game(ArrayList<Player> players) throws IllegalGame {
         this.players = players;
-        if (players.size() < 2 || players.size() > 6) throw new IllegalCard("Invalid Number of Players");
+        if (players.size() < 2 || players.size() > 6) throw new IllegalGame("Invalid Number of Players");
     }
 
     public ArrayList<Player> getPlayers() {

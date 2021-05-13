@@ -1,5 +1,6 @@
 package GUI;
 
+import Exceptions.IllegalCard;
 import Logic.*;
 
 public class Controller {

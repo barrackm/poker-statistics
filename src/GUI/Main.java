@@ -1,9 +1,6 @@
 package GUI;
 
-import Logic.Card;
-import Logic.Deck;
-import Logic.Hole;
-import Logic.IllegalCard;
+import Exceptions.IllegalCard;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;

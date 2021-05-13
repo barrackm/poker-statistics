@@ -1,6 +1,8 @@
 package Logic;
 
 
+import Exceptions.IllegalCard;
+
 import java.util.Objects;
 
 public class Card {

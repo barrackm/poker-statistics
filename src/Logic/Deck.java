@@ -1,11 +1,13 @@
 package Logic;
 
+import Exceptions.IllegalCard;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
 public class Deck extends ArrayList<Card> {
-    public Deck() throws IllegalCard{
+    public Deck() throws IllegalCard {
         super(52);
         for (int i = 0; i < 4; i++) {
             for (int j = 1; j < 14; j++) {

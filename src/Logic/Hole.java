@@ -1,5 +1,7 @@
 package Logic;
 
+import Exceptions.IllegalCard;
+
 public class Hole {
     private Card[] cards = new Card[2];
 
