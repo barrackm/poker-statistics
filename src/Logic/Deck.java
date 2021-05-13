@@ -34,7 +34,7 @@ public class Deck extends ArrayList<Card> {
     }
 
     public void removeCard(Card card) {
-        this.remove(this.indexOf(card));
+        this.remove(card);
     }
 
 

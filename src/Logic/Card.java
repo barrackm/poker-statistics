@@ -16,7 +16,7 @@ public class Card {
     public Card(Suit suit, int value) throws IllegalCard {
         this.suit = suit;
         this.value = value;
-        IllegalCard.validValue(value);
+        if (value < 1 || value > 13) throw new IllegalCard("Invalid Value");
     }
 
     public enum Suit {

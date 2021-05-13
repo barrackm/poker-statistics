@@ -22,13 +22,6 @@ public class Main extends Application {
 
     public static void main(String[] args) throws IllegalCard {
         launch(args);
-
-        Deck deck = new Deck();
-        deck.print();
-        Card ASPADES = new Card(Card.Suit.SPADE, 1);
-        Card ACLUBS = new Card(Card.Suit.CLUB, 1);
-        Hole hole = new Hole(ASPADES, ACLUBS, deck);
-        System.out.println("---");
-        deck.print();
+        new Controller();
     }
 }
