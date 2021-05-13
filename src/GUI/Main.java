@@ -3,6 +3,7 @@ package GUI;
 import Exceptions.IllegalCard;
 import GUI.gameui.StartScreen;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

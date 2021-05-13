@@ -31,7 +31,7 @@ public class MenuBar extends HBox {
 
     private void createTimeThread(){
         new Thread(() -> {
-            while (true){
+            while (Platform.isFxApplicationThread()){
                 try{
                     var time = new SimpleDateFormat("MMM dd, hh:mm").format(System.currentTimeMillis());
                     this.timeStamp.setText(time);
