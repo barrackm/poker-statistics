@@ -22,11 +22,12 @@ public class TableView extends Canvas {
 
     private void drawTable(){
 
+
         g.setFill(Color.GREEN);
         g.fillOval(0,
                 50,
                 this.getWidth(),
                 this.getHeight() / 1.25
-                );
+        );
     }
 }

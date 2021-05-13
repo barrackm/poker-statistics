@@ -3,8 +3,10 @@ package GUI.gameui;
 import GUI.gameui.gamescreenelements.MenuBar;
 import GUI.gameui.gamescreenelements.OptionsBar;
 import GUI.gameui.gamescreenelements.TableView;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 
 public class GameScreen extends BorderPane {
     public GameScreen(){
@@ -16,7 +18,7 @@ public class GameScreen extends BorderPane {
     private final TableView tableView = new TableView();
 
     private void init(){
-        this.setStyle("-fx-background-color: gray");
+        this.setStyle("-fx-background-color: darkkhaki");
         menuBar.setAlignment(Pos.BASELINE_RIGHT);
         this.setTop(menuBar);
 
