@@ -20,6 +20,5 @@ public class Hole {
     public void print() {
         cards[0].print();
         cards[1].print();
-
     }
 }

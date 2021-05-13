@@ -24,12 +24,11 @@ public class Main extends Application {
         launch(args);
 
         Deck deck = new Deck();
-        deck.shuffle();
         deck.print();
-        System.out.println("0000");
-        Hole hole = new Hole(deck);
-        hole.print();
-        System.out.println("0000");
+        Card ASPADES = new Card(Card.Suit.SPADE, 1);
+        Card ACLUBS = new Card(Card.Suit.CLUB, 1);
+        Hole hole = new Hole(ASPADES, ACLUBS, deck);
+        System.out.println("---");
         deck.print();
     }
 }
