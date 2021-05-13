@@ -2,6 +2,7 @@ package GUI.gameui;
 
 import GUI.gameui.gamescreenelements.MenuBar;
 import GUI.gameui.gamescreenelements.OptionsBar;
+import GUI.gameui.gamescreenelements.TableView;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 
@@ -10,8 +11,9 @@ public class GameScreen extends BorderPane {
         this.init();
     }
 
-    private final MenuBar menuBar = new MenuBar();
+    public final MenuBar menuBar = new MenuBar();
     private final OptionsBar optionsBar = new OptionsBar();
+    private final TableView tableView = new TableView();
 
     private void init(){
         this.setStyle("-fx-background-color: gray");
@@ -21,5 +23,7 @@ public class GameScreen extends BorderPane {
 
         optionsBar.setAlignment(Pos.BASELINE_LEFT);
         this.setBottom(optionsBar);
+
+        this.setCenter(tableView);
     }
 }
