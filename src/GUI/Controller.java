@@ -15,6 +15,7 @@ public class Controller {
     private final StartScreen startScreen = new StartScreen();
     private final GameScreen gameScreen = new GameScreen();
     public Stage stage;
+    private int numPlayers = 0;
 
 
     public Controller(Stage stage) throws IllegalGame {
@@ -27,7 +28,28 @@ public class Controller {
         stage.setTitle("Hello World");
         stage.setScene(new Scene(this.startScreen, 300, 275));
 
-        this.startScreen.startGame.setOnAction(e -> stage.setScene(new Scene(this.gameScreen, 800, 500)));
+        this.startScreen.startGame.setOnAction(e ->{
+            try {
+                this.game = new Game(numPlayers);
+                stage.setScene(new Scene(this.gameScreen, 800, 500));
+            } catch (IllegalGame illegalGame) {
+                illegalGame.printStackTrace();
+            }
+        });
+
+        this.startScreen.numberOfPlayers.setOnAction(e -> {
+            String string = this.startScreen.numberOfPlayers.getText();
+            try {
+                numPlayers = Integer.parseInt(string);
+            } catch (Exception ignored) {}
+        });
+
+        this.startScreen.numberOfPlayers.focusedProperty().addListener(e -> {
+            String string = this.startScreen.numberOfPlayers.getText();
+            try {
+                numPlayers = Integer.parseInt(string);
+            } catch (Exception ignored) {}
+        });
 
 
         try{ this.game = new Game(3); } catch (Exception ignored) {}
