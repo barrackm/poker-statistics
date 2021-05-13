@@ -2,6 +2,8 @@ package Logic;
 
 import Exceptions.IllegalGame;
 
+import Exceptions.IllegalCard;
+
 import java.util.ArrayList;
 
 public class Game {
