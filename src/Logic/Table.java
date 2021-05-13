@@ -2,10 +2,10 @@ package Logic;
 
 import java.util.ArrayList;
 
-public class Board {
+public class Table {
     private Card[] communityCards = new Card[5];
 
-    public Board(Deck deck) {
+    public Table(Deck deck) {
         for(int i = 0; i < 5; i++) {
             this.communityCards[i] = new Card(deck);
         }

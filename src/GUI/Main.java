@@ -1,6 +1,7 @@
 package GUI;
 
 import Exceptions.IllegalCard;
+import Exceptions.IllegalGame;
 import GUI.gameui.StartScreen;
 import javafx.application.Application;
 import javafx.application.Platform;
