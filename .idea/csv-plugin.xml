@@ -52,6 +52,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\Logic\HandRankings.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\Logic\Hole.java">
           <value>
             <Attribute>
@@ -66,7 +73,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\Logic\Player.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\Logic\Talbe.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\Tests\ScoringTesting.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class Controller {
     private Game game;
@@ -50,9 +51,6 @@ public class Controller {
                 numPlayers = Integer.parseInt(string);
             } catch (Exception ignored) {}
         });
-
-
-        try{ this.game = new Game(3); } catch (Exception ignored) {}
 
         this.createTimeThread();
         stage.show();
