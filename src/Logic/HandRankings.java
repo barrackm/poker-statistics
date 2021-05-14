@@ -56,44 +56,43 @@ public class HandRankings {
         int firstPairValue = 0;
         int secondPairValue = 0;
         //Testing for flush or straight and adding to frequency array
-        for (int i = 0; i < cards.size(); i++) {
-            switch (cards.get(i).getSuit()){
-                case SPADE -> spades.add(cards.get(i));
-                case HEART -> hearts.add(cards.get(i));
-                case CLUB -> clubs.add(cards.get(i));
-                case DIAMOND -> diamonds.add(cards.get(i));
+        for (Card value : cards) {
+            switch (value.getSuit()) {
+                case SPADE -> spades.add(value);
+                case HEART -> hearts.add(value);
+                case CLUB -> clubs.add(value);
+                case DIAMOND -> diamonds.add(value);
             }
-            frequencies[cards.get(i).getValue() - 1]++;
+            frequencies[value.getValue() - 1]++;
         }
 
         if (spades.size() >= 5) {
             if (isStraight(spades)) {
-                return STRAIGHTFLUSH + highestCard(spades) / 100.;
+                return STRAIGHTFLUSH + highestOfStraight(spades) / 100.;
             } else
                 return FLUSH + scoreOrdered5Cards(spades);
         }
 
         if (hearts.size() >= 5) {
             if (isStraight(hearts)) {
-                return STRAIGHTFLUSH + highestCard(hearts) / 100.;
+                return STRAIGHTFLUSH + highestOfStraight(hearts) / 100.;
             } else
                 return FLUSH + scoreOrdered5Cards(hearts);
         }
 
         if (clubs.size() >= 5) {
             if (isStraight(clubs)) {
-                return STRAIGHTFLUSH + highestCard(clubs) / 100.;
+                return STRAIGHTFLUSH + highestOfStraight(clubs) / 100.;
             } else
                 return FLUSH + scoreOrdered5Cards(clubs);
         }
 
         if (diamonds.size() >= 5) {
             if (isStraight(diamonds)) {
-                return STRAIGHTFLUSH + highestCard(diamonds) / 100.;
+                return STRAIGHTFLUSH + highestOfStraight(diamonds) / 100.;
             } else
                 return FLUSH + scoreOrdered5Cards(diamonds);
         }
-
 
         for (int i = 0; i < 13; i++) {
             if (frequencies[i] == 4) {
@@ -125,13 +124,28 @@ public class HandRankings {
                 } else {
                     firstPairValue = i + 1;
                 }
-
             }
         }
-        if (pair && threeOf) return FULLHOUSE + setValue / 100. + firstPairValue / 10000.;
+
+        if (pair && threeOf) {
+            if (setValue == 1) setValue = 14;
+            return FULLHOUSE + setValue / 100. + firstPairValue / 10000.;
+        }
         if (isStraight(cards)) return STRAIGHT + highestOfStraight(cards) / 100.;
-        if (threeOf) return THREEKIND + setValue / 100. + highestRemainingCard(cards, setValue) / 10000. +
-                highestRemainingCard(cards, setValue, highestRemainingCard(cards, setValue)) / 1000000.;
+        if (threeOf) {
+            ArrayList<Card> remainingCards = new ArrayList<>();
+            for (Card card : cards) {
+                if (card.getValue() != setValue) remainingCards.add(card);
+            }
+
+            if (setValue == 1) setValue = 14;
+
+            if (cards.size() >= 5) {
+                return THREEKIND + setValue / 100. + scoreOrderedNCards(remainingCards, 2) / 100.;
+            } else {
+                return THREEKIND + setValue / 100. + scoreOrderedNCards(remainingCards, cards.size() - 3) / 100.;
+            }
+        }
         if (twoPair) {
             ArrayList<Card> remainingCards = new ArrayList<>();
             int highestValue;
@@ -141,80 +155,68 @@ public class HandRankings {
             } else {
                 highestValue = firstPairValue;
             }
+
             for (Card card : cards) {
                 if (card.getValue() != firstPairValue && card.getValue() != secondPairValue) remainingCards.add(card);
             }
-            return TWOPAIR + highestValue / 100. + secondPairValue / 10000. + scoreOrderedNCards(remainingCards, 1) / 10000.;
+
+            if (cards.size() >= 5) {
+                return TWOPAIR + highestValue / 100. + secondPairValue / 10000. + scoreOrderedNCards(remainingCards, 1) / 10000.;
+            } else {
+                return TWOPAIR + highestValue / 100. + secondPairValue / 10000.;
+            }
         }
         if (pair) {
             ArrayList<Card> remainingCards = new ArrayList<>();
             for (Card card : cards) {
                 if (card.getValue() != firstPairValue) remainingCards.add(card);
             }
-            return PAIR + firstPairValue / 100. + scoreOrderedNCards(remainingCards, 3) / 100.;
-        }
 
+            if (cards.size() >= 5) {
+                return PAIR + firstPairValue / 100. + scoreOrderedNCards(remainingCards, 3) / 100.;
+            } else {
+                return PAIR + firstPairValue / 100. + scoreOrderedNCards(remainingCards, cards.size() - 2) / 100.;
+            }
+        }
         return HIGHCARD + noHandScore(frequencies);
     }
 
     private static boolean isStraight(ArrayList<Card> cards) {
-        int adjacent = 0;
-        for (int i = 0; i < cards.size() - 1; i++) {
-            if (i != cards.size() - 1) {
-                if (cards.get(i).getValue() == cards.get(i + 1).getValue() - 1) {
-                    adjacent++;
-                    if (cards.get(i).getValue() == 13 && cards.get(0).getValue() == 1) {
-                        adjacent++;
-                    }
-                } else adjacent = 0;
-            }
+        int[] frequencies = new int[13];
+        Arrays.fill(frequencies,0);
+        for (Card card : cards) {
+            frequencies[card.getValue() - 1]++;
         }
-        if (adjacent >= 4) return true;
-        else return false;
+
+        if (frequencies[0] > 0 && frequencies[9] > 0 && frequencies[10] > 0
+                && frequencies[11] > 0 && frequencies[12] > 0) return true;
+        for (int i = 0; i < 9; i++) {
+            if (frequencies[i] > 0 && frequencies[i + 1] > 0 && frequencies[i + 2] > 0
+                    && frequencies[i + 3] > 0 && frequencies[i + 4] > 0) return true;
+        }
+        return false;
     }
 
     private static int highestOfStraight(ArrayList<Card> cards) {
-        int highest = 0;
-        int adjacent = 0;
-        for (int i = 0; i < cards.size() - 1; i++) {
-            if (i != cards.size() - 1) {
-                if (cards.get(i).getValue() == cards.get(i + 1).getValue() - 1 || (cards.get(i).getValue() == 13 && cards.get(0).getValue() == 1)) {
-                    adjacent += 1;
-                } else adjacent = 0;
-            }
-            if (adjacent >= 4) highest = cards.get(i).getValue();
-        }
-        return highest;
-    }
-
-    private static int highestCard(ArrayList<Card> cards) {
-        int value = 0;
+        int[] frequencies = new int[13];
+        Arrays.fill(frequencies,0);
         for (Card card : cards) {
-            if (card.getValue() == 1) return  14;
-            else if (card.getValue() > value) {
-                value = card.getValue();
-            }
+            frequencies[card.getValue() - 1]++;
         }
-        return value;
+
+        if (frequencies[0] > 0 && frequencies[9] > 0 && frequencies[10] > 0
+                && frequencies[11] > 0 && frequencies[12] > 0) return 14;
+        for (int i = 0; i < 9; i++) {
+            if (frequencies[i] > 0 && frequencies[i + 1] > 0 && frequencies[i + 2] > 0
+                    && frequencies[i + 3] > 0 && frequencies[i + 4] > 0) return i + 5;
+        }
+        return 0;
     }
 
     private static int highestRemainingCard(ArrayList<Card> cards, int exclusionValue) { // exclusion value is card value to be ignored when finding next highest
         int value = 0;
         for (Card card : cards) {
             if (card.getValue() != exclusionValue) {
-                if (card.getValue() == 1) return  14;
-                else if (card.getValue() > value) {
-                    value = card.getValue();
-                }
-            }
-        }
-        return value;
-    }
-
-    private static int highestRemainingCard(ArrayList<Card> cards, int exclusionValue1, int exclusionValue2) { // exclusion value is card value to be ignored when finding next highest
-        int value = 0;
-        for (Card card : cards) {
-            if (card.getValue() != exclusionValue1 && card.getValue() != exclusionValue2) {
                 if (card.getValue() == 1) return  14;
                 else if (card.getValue() > value) {
                     value = card.getValue();
