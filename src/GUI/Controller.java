@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class Controller {
     private Game game;
@@ -27,6 +28,23 @@ public class Controller {
     private void init() {
         stage.setTitle("Hello World");
         stage.setScene(new Scene(this.startScreen, 300, 275));
+
+
+        ArrayList<Card> cards = new ArrayList<>();
+        try {
+            cards.add(new Card(Card.Suit.SPADE, 1));
+            cards.add(new Card(Card.Suit.HEART, 1));
+            cards.add(new Card(Card.Suit.DIAMOND, 4));
+            cards.add(new Card(Card.Suit.SPADE, 4));
+            cards.add(new Card(Card.Suit.HEART, 6));
+            cards.add(new Card(Card.Suit.DIAMOND, 8));
+        } catch (IllegalCard illegalCard) {
+            illegalCard.printStackTrace();
+        };
+
+
+        System.out.println(HandRankings.determineHand(cards));
+
 
         this.startScreen.startGame.setOnAction(e ->{
             try {
@@ -50,9 +68,6 @@ public class Controller {
                 numPlayers = Integer.parseInt(string);
             } catch (Exception ignored) {}
         });
-
-
-        try{ this.game = new Game(3); } catch (Exception ignored) {}
 
         this.createTimeThread();
         stage.show();

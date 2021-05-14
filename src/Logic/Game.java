@@ -16,9 +16,7 @@ public class Game {
         }
         if (numPlayers < 2 || numPlayers > 6) throw new IllegalGame("Invalid Number of Players");
         newHand();
-        newHand();
-        newHand();
-        newHand();
+
     }
 
     public Game(ArrayList<Player> players) throws IllegalGame {

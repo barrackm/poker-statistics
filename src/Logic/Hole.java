@@ -2,12 +2,10 @@ package Logic;
 
 import Exceptions.IllegalCard;
 
-import java.util.Arrays;
-
 public class Hole {
     private Card[] cards = new Card[2];
 
-    public Hole(Deck deck) throws IllegalCard {
+    public Hole(Deck deck) {
         cards[0] = new Card(deck);
         cards[1] = new Card(deck);
     }
@@ -18,6 +16,10 @@ public class Hole {
         cards[1] = card2;
         deck.removeCard(card1);
         deck.removeCard(card2);
+    }
+
+    public Card[] getCards() {
+        return cards;
     }
 
     @Override

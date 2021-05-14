@@ -5,7 +5,7 @@ import Exceptions.IllegalCard;
 
 import java.util.Objects;
 
-public class Card {
+public class Card implements Comparable{
     private Suit suit;
     private int value;
 
@@ -28,6 +28,14 @@ public class Card {
         DIAMOND
     }
 
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,6 +52,17 @@ public class Card {
     @Override
     public String toString() {
         return this.suit + " " + this.value;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Card card = (Card) o;
+        if (this.value == 1 && card.value != 1) {
+            return card.value - 14;
+        } else if (this.value != 1 && card.value == 1) {
+            return 14 - this.value;
+        }
+        return card.value - this.value;
     }
 
     public void print() {

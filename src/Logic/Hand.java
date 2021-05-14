@@ -25,9 +25,14 @@ public class Hand {
         } catch (Exception ignored) {}
         dealHoles();
         this.table = new Table(deck);
-
         System.out.println(players);
-        System.out.println(pot);
+        System.out.println(table);
+        System.out.println("-----");
+        System.out.println(HandRankings.determineWinner(table, players));
+        System.out.println("-----");
+
+
+        //System.out.println(pot);
     }
 
     private void setBlinds() {
