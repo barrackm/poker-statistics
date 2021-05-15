@@ -12,7 +12,8 @@ public class Game {
     private int dealerIndex = 0;
 
     public Game(int numPlayers) throws IllegalGame {
-        for(int i = 0; i < numPlayers; i++) {
+        this.players.add(new Player("Juan", 100));
+        for(int i = 0; i < numPlayers - 1; i++) {
             this.players.add(new Player(this, 100));
         }
         if (numPlayers < 2 || numPlayers > 6) throw new IllegalGame("Invalid Number of Players");

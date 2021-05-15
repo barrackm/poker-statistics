@@ -9,6 +9,7 @@ public class Player implements Comparable {
     private double roundBet = 0;
     private double handScore;
     private boolean sittingOut = false;
+    private boolean isPerson = false;
 
     public Player(Game game, double money) {
         this.name = "Player " + (game.getPlayers().size() + 1);
@@ -18,6 +19,7 @@ public class Player implements Comparable {
     public Player(String name, double money) {
         this.name = name;
         this.money = money;
+        isPerson = true;
     }
 
     public void setHole(Hole hole) {
@@ -76,6 +78,10 @@ public class Player implements Comparable {
 
     public boolean isSittingOut() {
         return sittingOut;
+    }
+
+    public boolean isPerson() {
+        return isPerson;
     }
 
     public double determineAction(double pot, double highestBet) {
