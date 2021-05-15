@@ -30,14 +30,7 @@ public class Hand {
 
         this.table = new Table(deck);
 
-        //System.out.println(players);
-        //System.out.println(table);
-        //System.out.println("-----");
-        //System.out.println(HandRankings.determineWinner(table, players));
-        //System.out.println("-----");
         playHand();
-//
-
     }
 
     private void playHand() {

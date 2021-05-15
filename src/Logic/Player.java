@@ -85,6 +85,23 @@ public class Player implements Comparable {
     }
 
     public double determineAction(double pot, double highestBet) {
+        if (this.isPerson) {
+            return awaitUserAction(highestBet);
+        }
+        double bet = 0;
+        System.out.println(this.name);
+        double toCall = highestBet - roundBet;
+        System.out.println(toCall + " to call");
+        if (toCall == 0) {
+            bet = 5;
+        } else {
+            bet = toCall;
+        }
+        betMoney(bet);
+        return bet;
+    }
+
+    private double awaitUserAction(double highestBet) { // NEED TO CODE THIS
         double bet = 0;
         System.out.println(this.name);
         double toCall = highestBet - roundBet;
