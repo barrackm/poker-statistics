@@ -5,6 +5,7 @@ import Exceptions.IllegalGame;
 
 import java.util.ArrayList;
 
+// S
 public class Game {
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Player> activePlayers;
