@@ -2,12 +2,12 @@ package Logic;
 
 import Exceptions.IllegalGame;
 
-import Exceptions.IllegalCard;
 
 import java.util.ArrayList;
 
 public class Game {
     private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> activePlayers;
     private int dealerIndex = 0;
 
     public Game(int numPlayers) throws IllegalGame {
@@ -16,7 +16,6 @@ public class Game {
         }
         if (numPlayers < 2 || numPlayers > 6) throw new IllegalGame("Invalid Number of Players");
         newHand();
-
     }
 
     public Game(ArrayList<Player> players) throws IllegalGame {
@@ -34,6 +33,14 @@ public class Game {
         players.remove(player);
     }
 
+    private ArrayList<Player> updateActivePlayers(ArrayList<Player> allPlayers) {
+        ArrayList<Player> players = new ArrayList<>();
+        for (Player player:allPlayers) {
+            if (!player.isSittingOut()) players.add(player);
+        }
+        return players;
+    }
+
     public void setDealerIndex(int dealerIndex) {
         this.dealerIndex = dealerIndex;
     }
@@ -43,8 +50,14 @@ public class Game {
     }
 
     private void newHand() {
+        activePlayers = updateActivePlayers(players);
         Hand hand = new Hand(this);
         dealerIndex++;
+        dealerIndex %= activePlayers.size();
+    }
+
+    public ArrayList<Player> getActivePlayers() {
+        return activePlayers;
     }
 
     public ArrayList<Player> getPlayers() {
