@@ -62,6 +62,8 @@ public class Hand {
             if (pot == 0) break;
             if (pot < 0) System.out.println("OOOOOOOF");
         }
+
+        System.out.println(players);
     }
 
     private void manageHand(boolean firstRound) {
