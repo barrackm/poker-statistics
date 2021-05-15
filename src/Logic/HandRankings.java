@@ -30,8 +30,6 @@ public class HandRankings {
             System.out.println(player.getHandScore());
         }
 
-        System.out.println(players);
-
         ArrayList<Player> sortedPlayers = players;
         Collections.sort(sortedPlayers);
 

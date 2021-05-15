@@ -39,8 +39,10 @@ public class Player implements Comparable {
     }
 
     public double winMoney(double amount) {
+        System.out.println(this.name);
         money += amount;
         atRiskMoney = 0;
+        System.out.println(money);
         return amount;
     }
 
